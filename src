@@ -1,0 +1,50 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Dados das categorias (você pode salvar isso em um arquivo CSV ou usar diretamente no código)
+data = {
+    'id': [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 
+           11, 12, 13, 14, 15, 16, 17, 18, 19, 20],
+    'category_name': [
+        'Beading & Jewelry Making', 'Fabric Decorating', 'Knitting & Crochet Supplies', 
+        'Printmaking Supplies', 'Scrapbooking & Stamping Supplies', 'Sewing Products', 
+        'Craft & Hobby Fabric', 'Needlework Supplies', 'Arts, Crafts & Sewing Storage', 
+        'Painting, Drawing & Art Supplies', 'Craft Supplies & Materials', 
+        'Gift Wrapping Supplies', 'Party Decorations', 'Automotive Paint & Paint Supplies', 
+        'Heavy Duty & Commercial Vehicle Equipment', 'Automotive Tires & Wheels', 
+        'Automotive Tools & Equipment', 'Automotive Performance Parts & Accessories', 
+        'Car Care', 'Oils & Fluids'
+    ]
+}
+
+# Criar o DataFrame
+df = pd.DataFrame(data)
+
+# Exibir as primeiras linhas do DataFrame para conferência
+print("Visualização dos Dados:")
+print(df.head())
+
+# Gerar gráfico de barras das categorias
+plt.figure(figsize=(10,6))
+plt.bar(df['id'], df['category_name'], color='skyblue')
+plt.title('Categorias de Produtos')
+plt.xlabel('ID')
+plt.ylabel('Nome da Categoria')
+plt.xticks(rotation=90)
+plt.tight_layout()
+
+# Salvar o gráfico
+plt.savefig('grafico_categorias.png')
+plt.show()
+
+# Geração do relatório
+with open('relatorio.txt', 'w') as file:
+    file.write('Relatório de Categorias de Produtos\n')
+    file.write('=================================\n')
+    file.write(f'Total de categorias: {df.shape[0]}\n\n')
+    file.write('Categorias:\n')
+    for i, row in df.iterrows():
+        file.write(f"{row['id']}: {row['category_name']}\n")
+    file.write('\nVer gráfico de categorias em: grafico_categorias.png\n')
+
+print("Relatório gerado com sucesso! Verifique o arquivo 'relatorio.txt' e o gráfico 'grafico_categorias.png'.")
